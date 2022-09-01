@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.benten.themovieslist.apis.RetrofitBuilder
 import com.benten.themovieslist.databinding.LayoutMovieListFragmentBinding
 import kotlinx.coroutines.CoroutineScope
@@ -31,12 +32,24 @@ class MovieListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.rvMovies.adapter=moviesAdapter
+        binding.rvMovies.layoutManager=LinearLayoutManager(requireContext(),
+            LinearLayoutManager.VERTICAL,false)
         CoroutineScope(IO).launch {
             val popularsResponse = RetrofitBuilder.moviesApi.getPopularMovies(APY_KEY)
             withContext(Main){
                 binding.progressBar.isVisible = false
+                moviesAdapter.updateAll(popularsResponse.movieItems)
             }
 
+        }
+        moviesAdapter.setOnClickListener {
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.flContent,MovieDetailsFragment.newInstance(it.id))
+                addToBackStack(MovieDetailsFragment::class.java.name)
+                commit()
+            }
         }
     }
 

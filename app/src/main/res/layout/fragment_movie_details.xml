@@ -29,12 +29,12 @@
             android:elevation="1dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvMovieName"
-            app:layout_constraintBottom_toBottomOf="@id/ivLargePoster"
+            app:layout_constraintBottom_toBottomOf="@id/ivImagePoster"
             android:src="@color/black"
             />
 
         <ImageView
-            android:id="@+id/ivLargePoster"
+            android:id="@+id/ivImagePoster"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1.5"
@@ -44,14 +44,14 @@
             android:id="@+id/iv_aboutMovie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="60dp"
             android:text="About Movie"
+            android:layout_marginLeft="20dp"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/ivSmallPoster"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="30dp"
             android:textSize="30sp"
-            android:layout_marginTop="30dp"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivImagePoster" />
 
         <TextView
             android:id="@+id/tvMovieDescription"

@@ -10,15 +10,20 @@ import com.bumptech.glide.Glide
 
 class MoviesAdapter: RecyclerView.Adapter<MoviesViewHolder>() {
     private val movieItem = mutableListOf<MovieItem>()
+    private var clickListener:((MovieItem) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         val binding =
             LayoutMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MoviesViewHolder(binding)
     }
 
-
-
-
+    fun  updateAll(movies:List<MovieItem>){
+        movieItem.addAll(movies)
+        notifyDataSetChanged()
+    }
+    fun  setOnClickListener(listener:(MovieItem) -> Unit){
+        this.clickListener=listener
+    }
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
 
@@ -33,6 +38,9 @@ class MoviesAdapter: RecyclerView.Adapter<MoviesViewHolder>() {
 
             val posterUrl  =  "$IMAGE_PATH$posterPath"
             Glide.with(holder.binding.root.context).load(posterUrl).into(holder.binding.ivImagePoster)
+            holder.binding.root.setOnClickListener {
+                clickListener?.invoke(movieItem)
+            }
         }
     }
 

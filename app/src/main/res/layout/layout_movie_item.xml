@@ -60,9 +60,9 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tvAverageRating"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvAverageRating"
         android:layout_marginEnd="20dp"
         tools:text="9.5" />
     <TextView
